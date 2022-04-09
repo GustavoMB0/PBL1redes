@@ -5,7 +5,6 @@
 package uefs.pblsd1.Model;
 import java.net.*;
 import java.io.*;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -43,7 +42,6 @@ public class Server {
         private String id;
         private PrintWriter out;
         private BufferedReader in;
-        private ClientHandler handler;
        
         public Connection(Socket socket){
             this.clientSocket = socket;

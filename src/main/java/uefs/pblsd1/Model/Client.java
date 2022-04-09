@@ -13,12 +13,10 @@ import java.io.*;
 public class Client {
     private Socket clientSocket;
     private PrintWriter out;
-    private BufferedReader in;
+    BufferedReader in;
     protected String name;
     
-    public Client(String name){
-        this.name = name;
-    }
+    public Client(){}
     
     protected void connect(String ip, int port) throws IOException{
         clientSocket = new Socket(ip, port);

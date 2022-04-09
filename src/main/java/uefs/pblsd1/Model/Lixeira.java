@@ -32,41 +32,40 @@ public class Lixeira extends Client{
      * nem todos as funções terão parametros.Por fim o END signficia fim do comando para esse
      * portocolo foi escolhido o caractere ; para indicar fim do comando
      * @param quantidade Quantidade de lixo adicionado a lixeira, ainda não foi decidido se será um valor fixo ou inserido pelo "usuario"
-     * @return retorna true se a mensagem do servidor foi OK indicando que o comando foi recebido com sucesso pelo servidor
      * @throws java.io.IOException
      */
     
-    public boolean encher(float quantidade) throws IOException{
-       String msg, confirm;
+    public void encher(float quantidade) throws IOException{
+       String msg;
        this.capacidade += quantidade;
        msg = "E" + capacidade + ";";
        
-       confirm = super.sendMessage(msg);
-       
-       return confirm.equals("OK");
     }
     
     /**
      * Metodo para esvaziar a lixeira segue o mesmo protocolo de envio de mensagem que o metodo de encher, A mensagem
      * desse metodo segue o padrão ID COMAND END.Esse metodo não precisa de um parametro e o comando utilizado foi "C"
      * (Clear).
-     * @return retorna true se a mensagem do servidor foi OK indicando que o comando foi recebido com sucesso pelo servidor
      * @throws java.io.IOException
      */
-    public boolean esvaziar() throws IOException{
-        String msg, confirm;
+    public void esvaziar() throws IOException{
+        String msg;
         
         msg = "C;";
-        confirm = super.sendMessage(msg);
+        super.sendMessage(msg);
         
-        return confirm.equals("OK");
-    }
+       }
    
    
-    /*
-    *Metodo para travar a lixeira, não decidi o envio de mensagens do servidor ainda
-    public boolean travar(){
-        return true;
+    
+   //*Metodo para travar a lixeira, não decidi o envio de mensagens do servidor ainda
+    public void travar() throws IOException{
+        if(in.readLine().equals("T")){
+            loked = true;
+        }
     }
-    */
+    
+    public boolean travada(){
+        return loked;
+    }
 }
