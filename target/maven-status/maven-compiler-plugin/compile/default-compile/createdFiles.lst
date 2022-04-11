@@ -1,9 +1,10 @@
 uefs\pblsd1\Model\Server$Connection.class
 uefs\pblsd1\Model\Client.class
+uefs\pblsd1\Controler\Cadm.class
 uefs\pblsd1\PBLSD1.class
 uefs\pblsd1\Model\Lixeira.class
 uefs\pblsd1\Model\Server.class
 uefs\pblsd1\Model\Caminhao.class
-uefs\pblsd1\Model\Server$HandleConnect.class
 uefs\pblsd1\Controler\Ccaminhao.class
+uefs\pblsd1\Model\Administrador.class
 uefs\pblsd1\Controler\Clixeira.class

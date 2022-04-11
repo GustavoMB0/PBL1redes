@@ -13,7 +13,7 @@ import java.io.*;
 public class Client {
     private Socket clientSocket;
     private PrintWriter out;
-    BufferedReader in;
+    protected BufferedReader in;
     protected String name;
     
     public Client(){}
@@ -22,6 +22,8 @@ public class Client {
         clientSocket = new Socket(ip, port);
         out =  new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        
+        out.println(name);
     }
     
     protected String sendMessage(String message) throws IOException{
@@ -31,6 +33,7 @@ public class Client {
     }
     
     public void closeConnection() throws IOException{
+        out.println(".");
         in.close();
         out.close();
         clientSocket.close();

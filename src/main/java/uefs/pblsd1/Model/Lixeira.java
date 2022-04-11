@@ -14,6 +14,7 @@ import java.io.IOException;
  */
 public class Lixeira extends Client{
     private float capacidade;
+    private float lixo;
     private boolean loked;
     
     public Lixeira(float capacidade, String ip, int port) throws IOException{
@@ -37,9 +38,12 @@ public class Lixeira extends Client{
     
     public void encher(float quantidade) throws IOException{
        String msg;
-       this.capacidade += quantidade;
-       msg = "E" + capacidade + ";";
-       
+       if(lixo + quantidade > capacidade){
+           System.out.println("Quantidade de lixo excede a capacidade da lixeira");
+       }else{
+            lixo += quantidade;
+            msg = "E" + quantidade + ";";
+       }
     }
     
     /**

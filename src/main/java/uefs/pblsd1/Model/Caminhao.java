@@ -23,7 +23,7 @@ public class Caminhao extends Client{
     
     public void read() throws IOException{
         word = in.readLine();
-        lixeiras = word.split(";");   
+        lixeiras = word.split(",");   
     }
     
     public String[] getLixeiras(){
