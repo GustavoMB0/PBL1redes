@@ -17,6 +17,7 @@ import uefs.pblsd1.Controler.Clixeira;
  */
 public class PBLSD1 {   
     public static void main(String[] args) throws IOException {
+
         int port, capacidade;
         PBLSD1 main = new PBLSD1();
         Scanner reader = new Scanner(System.in);
