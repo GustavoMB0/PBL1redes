@@ -6,6 +6,8 @@ package uefs.pblsd1.Controler;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uefs.pblsd1.Model.Caminhao;
 
 /**
@@ -13,7 +15,7 @@ import uefs.pblsd1.Model.Caminhao;
  * @author gusta
  */
 public class Ccaminhao {
-    private String lixeiras[];
+    private String lixeiras[], word;
     private Scanner reader;
     private Caminhao caminhao;
     
@@ -24,9 +26,17 @@ public class Ccaminhao {
     
     public void start() throws IOException{
         while(true){
-            caminhao.read();
-            lixeiras = caminhao.getLixeiras();
-            printLixeiras();
+            System.out.println("Digite (.) para encerrrar");
+            word = reader.nextLine();
+            
+            if(word.equals(".")){
+                caminhao.stop();
+                caminhao.closeConnection();
+                break;
+            }else{
+                System.out.println("Digite um comando valido");
+                reader.reset();
+            }
         }
         
         //caminhao.closeConnection();
@@ -48,4 +58,18 @@ public class Ccaminhao {
 
         }
     }
+    
+    private class Ler extends Thread{
+        @Override
+        public void run(){
+            while(caminhao.isRuning())
+                try {
+                    caminhao.read();
+                    lixeiras = caminhao.getLixeiras();
+                    printLixeiras();
+                } catch (IOException ex) {
+                    Logger.getLogger(Cadm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
 }

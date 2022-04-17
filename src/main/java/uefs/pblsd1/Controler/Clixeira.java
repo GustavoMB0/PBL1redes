@@ -19,6 +19,7 @@ public class Clixeira {
     private String text;
     private final Lixeira lixo;
     
+    
     public Clixeira(int capacidade, String IP, int port) throws IOException{
         this.lixo = new Lixeira(capacidade, IP, port);
         reader = new Scanner(System.in);
@@ -37,11 +38,12 @@ public class Clixeira {
             }else if(text.equals("L")){
                 limpar();
             }else if(text.equals(".")){
-                l.stop();
+                lixo.stop();
                 lixo.closeConnection();
                 break;
             }else{
                 System.out.println("Digite um comando valido");
+                reader.reset();
             }
         }
     }
@@ -64,12 +66,13 @@ public class Clixeira {
     private class Ler extends Thread{
         @Override
         public void run(){
-            while(true)
+            while(lixo.isRuning()){
                 try {
                     lixo.travar();
                 } catch (IOException ex) {
                     Logger.getLogger(Clixeira.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }    
         }
     }
 }

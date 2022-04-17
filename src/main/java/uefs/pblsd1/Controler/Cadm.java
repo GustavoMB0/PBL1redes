@@ -6,6 +6,8 @@ package uefs.pblsd1.Controler;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uefs.pblsd1.Model.Administrador;
 
 /**
@@ -23,23 +25,22 @@ public class Cadm {
     }
     
     public void start() throws IOException{
+        new Ler().start();
         while(true){
             System.out.println("Digite o comando que deseja executar:(T)ravar, (P)riorizar ou (.) para finalizar ");
-            word = reader.nextLine();
-            
+            word = reader.nextLine();      
             if(word.equals("T")){
                 travar();
             }else if(word.equals("P")){
                 priorizar();
             }else if(word.equals(".")){
+                adm.stop();
                 adm.closeConnection();
                 break;
             }else{
                 System.out.println("Digite um comando valido");
+                reader.reset();
             }
-            adm.read();
-            lixeiras = adm.getLixeiras();
-            printLixeiras();
         }
     }
     
@@ -55,7 +56,7 @@ public class Cadm {
         adm.ordem(word);
     }
     
-        private void printLixeiras(){
+    private void printLixeiras(){
         char[] c;
         String aux = "Lixeira ", aux2 = "";
         System.out.print("Lixeiras \t\t Quantidade de lixo \n\n");
@@ -70,4 +71,18 @@ public class Cadm {
             System.out.println(aux2 + "\n");
         }
     }
+        
+    private class Ler extends Thread{
+        @Override
+        public void run(){
+            while(adm.isRuning())
+                try {
+                    adm.read();
+                    lixeiras = adm.getLixeiras();
+                    printLixeiras();
+                } catch (IOException ex) {
+                    Logger.getLogger(Cadm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
 }

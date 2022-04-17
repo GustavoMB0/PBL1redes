@@ -15,6 +15,7 @@ public class Client {
     private PrintWriter out;
     protected BufferedReader in;
     protected String name;
+    protected boolean run = true;
     
     public Client(){}
     
@@ -39,5 +40,13 @@ public class Client {
     
     protected String getId(){
         return name;
-    }    
+    }
+
+    public void stop(){
+        run = false;
+    }
+    
+    public boolean isRuning(){
+        return run;
+    }
 }
