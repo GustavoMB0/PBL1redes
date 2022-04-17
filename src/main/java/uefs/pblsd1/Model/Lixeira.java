@@ -43,6 +43,7 @@ public class Lixeira extends Client{
        }else{
             lixo += quantidade;
             msg = "E" + quantidade + ";";
+            super.sendMessage(msg);
        }
     }
     
@@ -64,7 +65,8 @@ public class Lixeira extends Client{
     
    //*Metodo para travar a lixeira, não decidi o envio de mensagens do servidor ainda
     public void travar() throws IOException{
-        if(in.readLine().equals("T")){
+        String sd = in.readLine();
+        if(sd.equals("T")){
             loked = true;
         }
     }

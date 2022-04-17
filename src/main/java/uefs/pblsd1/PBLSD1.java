@@ -26,11 +26,12 @@ public class PBLSD1 {
         Server servidor;
         String word, IP;
         
-        System.out.println("Deseja abrir um (S)ervidor, uma (L)ixeira, um (C)aminhão ou um (A)dministrador");
+        
         
         // Seleciona se vai inicializar como um servidor ou algum dos clientes
         OUTER:
         while (true) {
+            System.out.println("Deseja abrir um (S)ervidor, uma (L)ixeira, um (C)aminhão ou um (A)dministrador");
             word = reader.nextLine();
             switch (word) {
                 case "S":
@@ -40,9 +41,9 @@ public class PBLSD1 {
                     servidor.start(port);
                     break;
                 case "L":
-                    System.out.println("Digite o a capacidade da lixeira o IP e a porta do Servidor");
-                    capacidade = reader.nextInt();
+                    System.out.println("Digite o IP da lixeira a capacidade e a porta do Servidor");
                     IP = reader.nextLine();
+                    capacidade = reader.nextInt();
                     port = reader.nextInt();
                     lixeira = new Clixeira(capacidade, IP, port);
                     lixeira.start();
@@ -64,6 +65,7 @@ public class PBLSD1 {
                     break OUTER;
                 default:
                    System.out.println("Digite um caractere valido");
+                   reader.reset();
             }
         }
     }

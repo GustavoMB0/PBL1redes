@@ -30,6 +30,13 @@ public class Ccaminhao {
             //Elaborar o print de lixeiras, ver se vai ser nesseraio ao inves de mandar uma string, um arquivo
             
         }
+        
         //caminhao.closeConnection();
+    }
+    public void printLixeiras(){
+        System.out.println("Lixeiras atribuidas a rota do caminhão");
+        for (String lixeira : lixeiras) {
+            System.out.println(lixeira);
+        }
     }
 }

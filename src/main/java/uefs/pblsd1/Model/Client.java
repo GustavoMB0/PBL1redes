@@ -26,10 +26,8 @@ public class Client {
         out.println(name);
     }
     
-    protected String sendMessage(String message) throws IOException{
-        out.print(message);
-        String resp = in.readLine();
-        return resp;
+    protected void sendMessage(String message) throws IOException{
+        out.println(message);
     }
     
     public void closeConnection() throws IOException{

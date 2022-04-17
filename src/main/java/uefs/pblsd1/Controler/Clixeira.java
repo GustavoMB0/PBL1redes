@@ -6,6 +6,8 @@ package uefs.pblsd1.Controler;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uefs.pblsd1.Model.Lixeira;
 
 /**
@@ -25,6 +27,8 @@ public class Clixeira {
 
     
     public void start() throws IOException{
+        Ler l =new Ler();
+        l.start();
         while(true){
             System.out.println("Digite ação a ser realizada: (E)ncher, (L)impar ou (.) para finalizar");
             text = reader.nextLine();
@@ -33,12 +37,12 @@ public class Clixeira {
             }else if(text.equals("L")){
                 limpar();
             }else if(text.equals(".")){
+                l.stop();
                 lixo.closeConnection();
                 break;
             }else{
                 System.out.println("Digite um comando valido");
             }
-            lixo.travar();
         }
     }
     
@@ -55,5 +59,17 @@ public class Clixeira {
     
     private void limpar() throws IOException{
         lixo.esvaziar();
+    }
+    
+    private class Ler extends Thread{
+        @Override
+        public void run(){
+            while(true)
+                try {
+                    lixo.travar();
+                } catch (IOException ex) {
+                    Logger.getLogger(Clixeira.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
     }
 }
