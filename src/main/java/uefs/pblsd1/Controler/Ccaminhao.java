@@ -26,17 +26,26 @@ public class Ccaminhao {
         while(true){
             caminhao.read();
             lixeiras = caminhao.getLixeiras();
-            
-            //Elaborar o print de lixeiras, ver se vai ser nesseraio ao inves de mandar uma string, um arquivo
-            
+            printLixeiras();
         }
         
         //caminhao.closeConnection();
     }
-    public void printLixeiras(){
-        System.out.println("Lixeiras atribuidas a rota do caminhão");
-        for (String lixeira : lixeiras) {
-            System.out.println(lixeira);
+    
+    // L + id + capacidade,
+    private void printLixeiras(){
+        char[] c;
+        String aux = "Lixeira ", aux2 = "";
+        System.out.print("Lixeiras \t\t Quantidade de lixo \n\n");
+        for(String lixo: lixeiras){
+            c = lixo.toCharArray();
+            aux += c[1];
+            System.out.println(aux + "\t\t");
+            
+            for(int i = 2; i < c.length; i++){
+                aux += c[i];
+            }
+            System.out.println(aux2 + "\n");
         }
     }
 }

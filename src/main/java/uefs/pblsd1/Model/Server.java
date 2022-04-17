@@ -33,7 +33,6 @@ public class Server {
         while (true){
             new Connection(serverSocket.accept()).start();
         }
-
     }
     
     public void stop() throws IOException{
@@ -47,6 +46,7 @@ public class Server {
             travarLixeira(c);
         }else if(Character.compare(c[0], 'P') == 0){
             priorizar(c);
+            sendLixeiras();
         }
     }
     
@@ -65,9 +65,8 @@ public class Server {
         int a;
         Connection c;
         c = buscarLixeira(num);
-        a = lixeiras.indexOf(c);
-        lixeiras.remove(a);
-        lixeiras.add(0, c);
+        c.prioridade = c.capacidade*100;
+        ordenar();
     }
     
     private void travarLixeira(char[] msg){
@@ -90,6 +89,19 @@ public class Server {
         return null;
     }
     
+    private void sendLixeiras(){
+        for(Connection i: lixeiras){
+            message += "L" + i.id + i.capacidade + ",";
+        }
+        for(Connection b: clients){
+            b.sendMessage(message);
+        }
+    }
+    
+    private void ordenar(){
+        lixeiras.sort(new SortComparator());
+    }
+    
     
     // Classe privada que sera utilizada nos mapas de conexões, threads que ficam lendo mensagens enviadas pelos clientes e chamando uma outra classe para tratar essas mensagens
     private class Connection extends Thread{
@@ -100,7 +112,7 @@ public class Server {
         private int id;
         private PrintWriter out;
         private BufferedReader in;
-        private float capacidade = 0;
+        private float capacidade = 0, prioridade;
         
         public Connection(Socket socket){
             this.clientSocket = socket;
@@ -128,7 +140,8 @@ public class Server {
                         }else if(inputLine.contains("E")){
                             char[] c = inputLine.toCharArray();
                             capacidade += encher(c);
-                            //
+                            ordenar();
+                            sendLixeiras();
                         }else if(inputLine.contains("C")){
                             capacidade = 0;
                         }else{
@@ -149,5 +162,24 @@ public class Server {
         }
     }
     
+    private class SortComparator implements Comparator<Connection>{
+
+        @Override
+        public int compare(Connection o1, Connection o2) {
+            if(o1.prioridade > o2.prioridade){
+              return 1;
+            }else if(o1.prioridade == o2.prioridade){
+                if(o1.capacidade > o2.capacidade){
+                    return 1;
+                }else if(o1.capacidade == o2.capacidade){
+                    return 0;
+                }else{
+                    return -1;
+                }
+            }else{
+                return 0;
+            }
+        }
+    }
 }
 

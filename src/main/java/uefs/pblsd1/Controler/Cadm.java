@@ -37,11 +37,9 @@ public class Cadm {
             }else{
                 System.out.println("Digite um comando valido");
             }
-        /*  
             adm.read();
             lixeiras = adm.getLixeiras();
-            Printar ordem das lixeiras
-        */
+            printLixeiras();
         }
     }
     
@@ -55,5 +53,21 @@ public class Cadm {
         System.out.println("Digite o numero da lixeira que deseja priorizar");
         word = reader.nextLine();
         adm.ordem(word);
+    }
+    
+        private void printLixeiras(){
+        char[] c;
+        String aux = "Lixeira ", aux2 = "";
+        System.out.print("Lixeiras \t\t Quantidade de lixo \n\n");
+        for(String lixo: lixeiras){
+            c = lixo.toCharArray();
+            aux += c[1];
+            System.out.println(aux + "\t\t");
+            
+            for(int i = 2; i < c.length; i++){
+                aux += c[i];
+            }
+            System.out.println(aux2 + "\n");
+        }
     }
 }
