@@ -31,7 +31,6 @@ public class Ccaminhao {
         
         //caminhao.closeConnection();
     }
-    
     // L + id + capacidade,
     private void printLixeiras(){
         char[] c;
@@ -46,6 +45,7 @@ public class Ccaminhao {
                 aux += c[i];
             }
             System.out.println(aux2 + "\n");
+
         }
     }
 }
