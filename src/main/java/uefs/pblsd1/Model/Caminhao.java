@@ -26,6 +26,10 @@ public class Caminhao extends Client{
         lixeiras = word.split(",");   
     }
     
+    public void send(String word) throws IOException{
+        super.sendMessage(word);
+    }
+    
     public String[] getLixeiras(){
         return lixeiras;
     }
