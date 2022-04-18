@@ -57,18 +57,20 @@ public class Cadm {
     }
     
     private void printLixeiras(){
-        char[] c;
+         char[] c;
         String aux = "Lixeira ", aux2 = "";
         System.out.print("Lixeiras \t\t Quantidade de lixo \n\n");
         for(String lixo: lixeiras){
             c = lixo.toCharArray();
             aux += c[1];
-            System.out.println(aux + "\t\t");
+            System.out.print(aux + "\t\t");
             
             for(int i = 2; i < c.length; i++){
-                aux += c[i];
+                aux2 += c[i];
             }
             System.out.println(aux2 + "\n");
+            aux = "Lixeira ";
+            aux2 = "";
         }
     }
         
