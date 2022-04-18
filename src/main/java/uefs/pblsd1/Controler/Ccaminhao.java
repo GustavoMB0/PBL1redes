@@ -25,6 +25,7 @@ public class Ccaminhao {
     }
     
     public void start() throws IOException{
+        new Ler().start();
         while(true){
             System.out.println("Digite (.) para encerrrar");
             word = reader.nextLine();
@@ -51,13 +52,14 @@ public class Ccaminhao {
         for(String lixo: lixeiras){
             c = lixo.toCharArray();
             aux += c[1];
-            System.out.println(aux + "\t\t");
+            System.out.print(aux + "\t\t");
             
             for(int i = 2; i < c.length; i++){
-                aux += c[i];
+                aux2 += c[i];
             }
             System.out.println(aux2 + "\n");
-
+            aux = "Lixeira ";
+            aux2 = "";
         }
     }
     
