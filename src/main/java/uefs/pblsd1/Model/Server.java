@@ -51,10 +51,10 @@ public class Server {
     }
     
     private float encher(char[] msg){
-        String aux = null;
+        String aux = "";
         int i = 1;
         while(msg[i] != ';'){
-            aux = "" + msg[i];
+            aux += msg[i];
             i++;
         }
         return Float.parseFloat(aux);
@@ -144,6 +144,8 @@ public class Server {
                             sendLixeiras();
                         }else if(inputLine.contains("C")){
                             capacidade = 0;
+                            ordenar();
+                            sendLixeiras();
                         }else{
                             mensagemLida(inputLine);
                         }
@@ -167,14 +169,14 @@ public class Server {
         @Override
         public int compare(Connection o1, Connection o2) {
             if(o1.prioridade > o2.prioridade){
-              return 1;
+              return -1;
             }else if(o1.prioridade == o2.prioridade){
                 if(o1.capacidade > o2.capacidade){
-                    return 1;
+                    return -1;
                 }else if(o1.capacidade == o2.capacidade){
                     return 0;
                 }else{
-                    return -1;
+                    return 1;
                 }
             }else{
                 return 0;
