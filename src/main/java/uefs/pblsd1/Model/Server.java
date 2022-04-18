@@ -47,6 +47,8 @@ public class Server {
         }else if(Character.compare(c[0], 'P') == 0){
             priorizar(c);
             sendLixeiras();
+        }else if(Character.compare(c[0], 'M') == 0){
+            sendLixeiras();
         }
     }
     

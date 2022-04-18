@@ -33,6 +33,8 @@ public class Ccaminhao {
                 caminhao.stop();
                 caminhao.closeConnection();
                 break;
+            }else if(word.equals("M")){
+                caminhao.send(word);
             }else{
                 System.out.println("Digite um comando valido");
                 reader.reset();
