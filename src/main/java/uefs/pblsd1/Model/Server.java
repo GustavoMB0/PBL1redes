@@ -23,7 +23,7 @@ public class Server {
     private final List<Connection> clients;
     
     public Server(){
-        message = null;
+        message = "";
         lixeiras = new ArrayList<>();
         clients = new ArrayList<>();
     }
@@ -152,6 +152,7 @@ public class Server {
                             mensagemLida(inputLine);
                         }
                     }
+                    message = "";
                 }
                 in.close();
                 out.close();
